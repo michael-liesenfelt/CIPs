@@ -1,16 +1,16 @@
 ---
-CIP: 50?
-Title: Shelley’s Voltaire decentralization update 
-Author: Michael Liesenfelt <michael.liesenfelt@gmail.com>
+CIP: 50
+Título: Actualización de la descentralización de Shelley Voltaire 
+Autor: Michael Liesenfelt <michael.liesenfelt@gmail.com>
 Comments-URI: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentralization-update/97685
-Status: Draft
+Estado: Borrador
 Type: Standards
 Created: 2022-04-04
-License: [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+Licencia: [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
 Post-History: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentralization-update/97685 https://forum.cardano.org/t/minimum-pool-fees-with-a-brief-mention-of-k-changes/97002/82
 ---
 
-# List of Potential Reviewers:
+# Lista de Potenciales Revisores:
 
 - Aggelos Kiayias
 - Aikaterini-Panagiota Stouka
@@ -27,22 +27,24 @@ Post-History: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentra
 - Tobias Francee
 - Tom Stafford
 
-# Abstract
+# Extracto
 
-Improving decentralization is absolutely necessary for the long term health and growth of the Cardano ecosystem. The current reward formula has resulted in a stable but stagnant level of decentralization. With the benefit of hindsight over the last year the intent of (a0, k) has not resulted in the desired decentralization outcome. This CIP provides the justification, methods, metrics, and implementation schedule for an improvement program to increase decentralization of the Cardano network.
+Mejorar la descentralización es absolutamente necesario para la salud y crecimiento del ecosistema de Cardano a largo plazo. La fórmula actual de recompensas ha resultado en un estable pero estancado nivel de descentralización. Con el beneficio de retrospección durante el último año, la intención de (a0, k) no ha resultado en la descentralizada secuela esperado. Este CIP provee las justificaciones, métricas, los métodos y calendario de implementación de un programa mejorado para incrementar la descentralización de la red de Cardano.
 
-The proposed reward equation retains the function of k for diminishing rewards based on stake but repurposes the a0 parameter for enforcing diminishing rewards based on pledge leverage. The proposed equation enforces a set of principles to ensure stakeholders of dramatically different size can all reach the same maximum yield. The yield ceiling feature prevents the formation of two classes of stakeholders and removes some of the benefits of centralization. The economic motivations of the largest stakeholders will be aligned with decentralization, reward diversification, fault tolerance, and ensuring the sybil protection of the entire community.
+La ecuación de recompensas propuesta retiene la función de k de recompensas disminuyentes basada en “stake”, pero reutiliza el parámetro a0 para imponer las recompensas disminuyentes basadas en la ventaja por pledge. La ecuación propuesta impone una serie de principios para asegurar que todos los accionistas de tamaños dramáticamente diferentes alcancen el mismo rendimiento máximo.La característica del tope en el rendimiento previene la formación de dos clases de accionistas y remueve algunos de los beneficios de la centralización.  Las motivaciones económicas de los accionistas más grandes se alinearían con la descentralización, diversificación de recompensas, tolerancia a fallos, y aseguraría la protección sibila de la comunidad entera.
 
 
-# Motivation
+# Motivación
 
-Improving decentralization is absolutely necessary for the long term health and growth of the Cardano ecosystem. The current reward formula has resulted in a stable but stagnant level of decentralization. The motivation is to provide the justification, methods, metrics, and implementation schedule for an improvement program to increase decentralization of the Cardano network.
+Mejorar la descentralización es absolutamente necesario para la salud y crecimiento del ecosistema de Cardano a largo plazo. La fórmula actual de recompensas ha resultado en un estable pero estancado nivel de descentralización. La motivación es proveer las justificaciones, métricas, los métodos y calendario de implementación de un programa mejorado para incrementar la descentralización de la red de Cardano.
 
-K and a0 are input parameters to the reward formulation designed to promote decentralization. The original intention for parameter k was for it to set a ‘soft-cap’ on a pool’s size and thereby encourage the system to converge toward k pools of equal size delivering equal return per unit of stake for all delegates. In the ideal world this would mean k pools that are roughly equally saturated producing a roughly equal proportion of the blocks [1]. An underlying assumption was that one entity would run only one pool and design discussions about these parameters have described running multiple pools as a form of Sybil attack [2].
 
-However, the input parameters have not achieved these goals. Currently there are single entities that run 10,20,30 or even 100 separate pools. It is proposed that the “average resulting decentralization” should be measured based on the stake held by entire entities/groups, rather than a count of individual pools. “K-effective” is hereby used to measure the “average resulting decentralization” and is computed using Equation 1. The Nakamoto Coefficient is approximately half of k-effective rounded up to the nearest integer. K-effective provides a higher resolution quantification of network decentralization compared to the Nakamoto Coefficient.
+K y a0 son parámetros introducidos a la formulación de recompensa diseñada para promover la descentralización. La intención original del parámetro k era que estableciera un ‘soft-cap’ en el tamaño de una pool y por consecuencia fomentar al sistema a que convergiera hacia k pools del mismo tamaño, entregando un retorno equitativo por unidad de stake a todos los delegadores. En el mundo ideal, esto significaría que k pools que son casi igualmente saturados producirían una proporción aproximadamente igual de bloques. Una suposición subyacente era que una entidad correría solamente una pool, y discusiones de diseño sobre estos parámetros han descrito correr múltiples pools como una forma de ataque sibilo. [2].
 
-The Cardano network currently produces ~21,600 blocks per epoch with ~2400 groups producing between 0 and ~3600 blocks per group. If averaged, 41 equal sized groups would each be creating ~527 blocks per epoch. The historical decentralization of the network shown in Figure 1 has improved from 30.0 in epoch 245 to between 39.0 and 43.0 after epoch 260. This “effective decentralization” or “k-effective” is not even close to the 500 figure targeted by the current k=500 parameter. A partial example of the table used to compute k-effective is shown in Figure 2.
+Sin embargo, los parámetros introducidos no han logrado estas metas. Actualmente hay entidades únicas que corren 10,20,30 o hasta 100 pools separadas. Se ha propuesto que el “resultado promedio de descentralización” sea calculado a base de stake sostenido por cada entidad/grupo. “K-efectivo” es por eso utilizado para medir el “resultado promedio de descentralización” y es computado usando Ecuación 1. El Coeficiente Nakamoto es aproximadamente la mitad de k-efectivo redondeado al entero más cercano. K-efectivo provee una resolución cuantificada más alta de descentralización de la red comparada al Coeficiente Nakamoto.
+
+
+La red de Cardano actualmente produce ~21,600 bloques por epoch con ~2,400 grupos produciendo entre 0 a ~3,600 bloques por grupo. Si se promedia, 41 grupos del mismo tamaño crearían cada uno ~527 bloques por epoch. La historia de la descentralización de la red enseñada en Figura 1 ha mejorado de 30.0 en epoch 245 a entre 39.0 y 43.0 después del epoch 260. Esta “descentralización efectiva” o “k-efectivo” no está para nada cerca a la figura de 500 que tiene el actual parámetro k=500 como blanco.  Un ejemplo parcial de la tabla usada para computar k-efectivo es enseñado en Figura 2.
 
 (1) https://iohk.io/en/blog/posts/2020/11/05/parameters-and-decentralization-the-way-ahead/
 
@@ -51,182 +53,182 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 <img src="equation1.png" width="400"> (1)
 
 ![Figure 1](k-effective.png)
-Figure 1. Historical k-effective from epoch 245 to present.
+Figure 1. Historial del k-efectivo desde epoch 245 al presente.
 
 ![Figure 2](k-effective-table.png)
-Figure 2. K-effective table.
+Figure 2. Tabla de cálculo del k-efectivo
 
-## The Intent of (a0,k)
+## La intención del (a0,k)
 
-To cite Aggelos Kiayias, Chief Scientist of IOG:
+Citando Aggelos Kiayias, Chief Scientist de IOG:
 
 > “Central to the mechanism’s behavior are two parameters: k and a0. The k-parameter caps the rewards of pools to 1/k of the total available. The a0 parameter creates a benefit for pledging more stake into a single pool; adding X amount of pledge to a pool increases its rewards additively by up to a0*X. This is not to the detriment of other pools; **any rewards left unclaimed due to insufficient pledging will be returned to the Cardano’s reserves and allocated in the future**.” [3]
  
 > “Paired with the assessment of stake pools performed by the delegates, **this mechanism provides the right set of constraints for the system to converge to a configuration of k equal size pools with the maximum amount of pledge possible**.” [3]
  
-The analysis of the current reward formula in [4] equated 1 pool to 1 entity. In the real world 1 entity can choose to delegate to another entity, operate one pool, **or operate many pools**. This oversight in the original analysis contributed to the proliferation of multipools in defiance of k parameter increases.
+El análisis de la fórmula de recompensas actual en [4] igualaba 1 pool a 1 entidad. En el mundo real 1 entidad puede escoger delegar a otra entidad, operar un pool, u operar múltiples pools. Este desprevenido error en el análisis original contribuyó a la proliferación de múltiples pools en contra de incrementos en el parámetro k.
 
 (3) https://iohk.io/en/blog/posts/2020/11/13/the-general-perspective-on-staking-in-cardano/
 
 (4) https://arxiv.org/ftp/arxiv/papers/1807/1807.11218.pdf
 
-## The Current Reward Formula
+## La Fórmula de Recompensas Actual
 
-From “4.1 Our RSS construction” of “Reward Sharing Schemes for Stake Pools” [5] the current rewards equation is:
+Desde “4.1 Our RSS construction” de “Reward Sharing Schemes for Stake Pools” [5]   la ecuación de recompensas actual es:
 
 <img src="equation2.png" width="600"> (2)
 
-where:
+donde:
 
-λ’ = min{λ,β}, σ’ = min{σ,β} and β,α are fixed parameters.
+λ’ = min{λ,β}, σ’ = min{σ,β} and β,α son parámetros fijos.
 
-A natural choice is β = 1/k, where k is the target number of pools.
+Una elección natural β = 1/k, donde k es el deseado número de pools.
 
-and the following are current protocol parameters:
+y los siguientes son parámetros actuales del protocolo:
 
 k = 500
 
 α = a0 = 0.3
  
-The a0 parameter represents the fraction of the rewards (R/(1+a0)) which are not paid out unless all of the stake is pledged. An a0 of 0.3 ensures that 1.0-1.0/(1.0+0.3) = **23% of the total rewards R will be withheld from low pledge fraction pools and returned to the reserve**. The effect of this formula is that increased pledge results in retaining more of the available rewards R. However, this benefit is not linear, rather it is drastically biased towards the saturation limit. The σ’ = min{σ,β} term enforces a reward limit based on k. Visualizing the resulting field of outcomes at various pledge amounts from 0.00% to 100.0% is necessary. The red dotted line “Max Reward” represents the maximum available yield available at current network stake size.
+El parámetro a0 representa la fracción de las recompensas (R/(1+a0)) que no son pagadas a menos que todo el stake esté en pledge. Un a0 de 0.3 asegura que 1.0-1.0/(1.0+0.3) = 23% de las recompensas totales R serán retenidas de la fracción de pools con bajo pledge y regresadas a la reserva. El efecto de esta fórmula es que el pledge incrementado resulta en retener más de las recompensas disponibles R. Sin embargo, este beneficio no es lineal, sino que es drásticamente perjudicial hacia el límite de saturación. El término σ’ = min{σ,β} impone un limite en recompensas basado en k. Es necesario visualizar el campo de resultados concluyentes de diferentes cantidades de pledges desde 0.00% a 100.0%. La línea de puntos roja “Recompensa Máxima” representa el rendimiento máximo disponible del R con el tamaño actual de la red de stake.
 
 <img src="a0 0.3 minfee 340.png">
 
-## If the minimum fee is 30
+## Si el cobro mínimo es 30
 
 <img src="a0 0.3 minfee 30.png">
 
-## If the minimum fee is 0
+## Si el cobro mínimo es 0
 
 <img src="a0 0.3 minfee 0.png">
 
-## If a0 is increased to 0.5
+## Si a0 se incrementa a 0.5
 
 <img src="a0 0.5 minfee 340.png">
 
-## If a0 is increased to 1.0
+## Si a0 se incrementa a 1.0
 
 <img src="a0 1.0 minfee 340.png">
 
-## If a0 is increased to 10.0
+## Si a0 se incrementa a 10.0
 
 <img src="a0 10.0 minfee 340.png">
 
-## If a0 is decreased to 0.2
+## Si a0 se disminuye a 0.2
 
 <img src="a0 0.2 minfee 340.png">
 
-## If a0 is decreased to 0.1
+## Si a0 se disminuye a 0.1
 
 <img src="a0 0.1 minfee 340.png">
 
-## If a0 is decreased to 0.0
+## Si a0 se disminuye a 0.0
 
 <img src="a0 0.0 minfee 340.png">
 
-## If a0 is decreased to 0.0 and minFee = 0
+## Si a0 se disminuye a 0.0 y mínimo cobro = 0
 
 <img src="a0 0.0 minfee 0.png">
 
-## The Reality of (a0,k)
+## La Realidad de (a0,k)
 
-The intent of parameters (a0, k) has not been realized. The graph of k-effective shows that increasing k from 150 to 500 did not result in a proportional increase to decentralization. The k parameter is currently 500 / 41 = 12.2 times larger than the effective decentralization k-effective. In epoch 333  46% of all stake was controlled by non-exchange multi-pool operators. 
+La intención de los parámetros (a0, k) no se ha realizado. La gráfica de k-efectivo demuestra que incrementando k de 150 a 500 no resultó en un incremento proporcional de la descentralización. El parámetro k actualmente es 500/41 = 12.2 veces más grande que el efectivo descentralizado k-efectivo. En Epoch 333, 46% del stake total estaba controlado por operadores de multi-pools que no son exchanges. 
 
-Another important determinant of the ability for small pools to compete with larger pools is the mandatory minimum fee (minFee parameter) which is currently 340₳. This minimum fee is a higher percentage of the total rewards for a small pool compared to a larger pool. It means that delegator yields for a small pool will not exceed 4.0% until the pool has at least 10.0% saturation (currently ~6.8M₳). This is a significant barrier to entry for small pools.
+Otro determinante importante de la habilidad para que pools pequeños puedan competir con pools más grandes es el cobro mínimo mandatorio el cual es actualmente 340₳. Este cobro mínimo es un porcentaje más alto de las recompensas totales para un pool pequeño que para un pool grande. Esto significa que las ganancias de delegadores para un pool pequeño no exceden 4.0% hasta que la pool tenga al menos 10.0% de saturación (actualmente ~6.8M₳). Esta es una barrera de entrada significante para pools pequeños.
 
-Billions of ADA is currently staked in pools with nearly 0 pledge and extremely high leverage. Also, a billion ADA is currently pledged in nearly saturated private pools closed to community delegation. There are very few public pools accepting community delegation with pledge amounts between 5M₳ and 60M₳ and the vast majority of public pools have less than 1M₳ pledge. The following bubble chart shows the distribution of stake as a function of group leverage on a log(Stake) vs log(Leverage) scale. The current pledge incentive mechanism only becomes relevant in a small segment of this chart below a leverage of 10 and above a pledge amount of 10M₳. The Single Pool Operator Alliance (SPA) is a collective of ~2250 individual pools and pool operators with a collective stake of 5B₳ at an average leverage factor of only 22.
+Billones de ADA están actualmente staked en pools con casi 0 pledge y pledges extremadamente altos. También, un billón de ADA están actualmente como pledge en pools privadas al borde de saturación que están cerradas a delegación de la comunidad. Hay muy pocos pools públicos aceptando delegación de la comunidad con pledge de montos entre 5M₳ a 60M₳ y la gran mayoría de pools públicas tienen menos de 1M₳ en pledge. La siguiente tabla demuestra la distribución de stake como función de ventaja, o “leverage” en inglés, en una escala log(Stake) vs log(Leverage). El mecanismo de incentivo actual del pledge solo se vuelve relevante en un pequeño segmento de esta tabla debajo de un leverage de 10 y encima de un pledge de 10M₳. La Alianza “Single Pool Operator Alliance” (SPA) es un colectivo de ~2,250 pools individuales y operadores de pools con un stake colectivo de 5B₳ con un factor leverage promedio de solo 22. La SPA es el ancla de descentralización en Cardano.
 
 <img src="stake vs leverage current.png">
 
-In the original design, parameter a0 represented the influence the operator’s pledge had on the desirability of the pool. In other words, more pledge should mean the pool would be more desirable for stake delegation. However the current reward formula has not produced this effect. See Figure 2. With increasing pledge as a proportion of total stake there is little noticeable effect on rewards until very high pledge percentages. These very high pledge percentages are not attainable except by extremely large stakeholders. Furthermore having such a high pledge percentage would defeat the purpose of community staking since the pool would already be saturated when the maximum pledge benefit is earned.
+En el diseño original, el parámetro a0 representó la influencia que el pledge del operador tenía en la atractividad de la pool. En otras palabras, más pledge significa que la pool es más atractiva para recibir delegación. Sin embargo, la fórmula de recompensas actual no ha producido este efecto. Ver Figura 2. Con pledge incrementando en proporción del stake total, hay muy poco efecto perceptible en recompensas hasta que vemos altos porcentajes de pledge. Estos altos porcentajes de pledge no son obtenibles excepto por accionistas extremadamente grandes. Además, teniendo un porcentaje de pledge tan alto derrotaría el propósito del staking de la comunidad, ya que la pool ya estaría saturada cuando el beneficio de pledge máximo se obtiene.
 
-The reality of the past 18 months is that pool operators have split pledge across multiple pools because it is more profitable to earn fees (minFee + margin%) than it is to benefit from increasing their pledge to a single pool. The small increase in yield for pools with less than 10M₳ pledge is also much less than the random statistical uncertainty of rewards per epoch. The pledge incentive is currently a statistically unnoticed benefit used only by large private stakeholders. The current reward equation has sacrificed fair egalitarian rewards for an incentive that is not providing Sybil protection as intended.
+La realidad de los previos 18 meses es que operadores de pools han dividido su pledge por múltiples pools porque es más rentable (cobro mínimo + margen%) que incrementar el pledge en un solo pool. El pequeño incremento en ganancias para pools con menos de 10M₳ en pledge es mucho menos que la aleatoria certeza de recompensas cada epoch. El incentivo del pledge es actualmente un beneficio estadísticamente desapercibido usado solo por grandes inversionistas privados. La ecuación de recompensas actual ha sacrificado recompensas igualitarias justas por un incentivo que no está proveyendo protección sibila como se destinaba.
 
-## The SundaeSwap Effect
+## El Efecto Sundaeswap
 
-The SundaeSwap Initial Stake Offering (ISO) proved that community delegator stake can be very mobile. More than a couple billion in stake centralized into ISO groups. After realizing the popularity of their ISO resulted in a centralization of the network SundaeSwap launched a ‘Reverse’ ISO for the benefit of single pools. The RISO temporarily reversed the centralization trend as a billion ADA was delegated to small pools. The Cardano network reached a decentralization factor of 43.22 in epoch 321. After the RISO these decentralization gains reversed because the underlying incentives of the reward formula have not changed. This proves that the community is engaged and their stake is mobile, especially for yield and gains.
+El SundaeSwap Initial Stake Offering (ISO) demostró que la participación del delegador de la comunidad puede ser muy móvil. Más de un par de billones en participación se centralizó en grupos de ISO. Después de darse cuenta que la popularidad de su ISO resultó en una centralización de la red, SundaeSwap lanzó un ISO 'Reverse' en beneficio de los grupos individuales. El RISO revirtió temporalmente la tendencia de centralización cuando se delegaron un billón de ADA a pequeños grupos. La red Cardano alcanzó un factor de descentralización de 43.22 en la epoch 321. Después de la RISO, estas ganancias de descentralización se revirtieron porque los incentivos subyacentes de la fórmula de recompensa no han cambiado. Esto demuestra que la comunidad está comprometida y que su participación es móvil, especialmente en cuanto a rendimiento y ganancias.
 
-## a0: The pledge yield boosting parameter
+## a0: El parámetro del pledge que aumenta rendimiento
 
-An intentional design of the current reward equation is to purposefully allow large stakeholders pledging to private pools to earn the maximum possible yields while excluding community delegation. The vast majority of pools with pledge <10% stake saturation have an asymptotic yield currently approaching a maximum yield of 4.25%. A high pledge fraction in a private pool can earn up to the maximum available 5.5% yield, 30% more yield than low pledge community pools. 
+Un diseño intencional de la ecuación de recompensa actual es permitir deliberadamente que las grandes partes interesadas que suplican a los grupos privados obtengan los máximos rendimientos posibles mientras excluyen la delegación de la comunidad. La gran mayoría de los pools con compromiso <10% de saturación de participación tienen un rendimiento asintótico que actualmente se acerca a un rendimiento máximo de 4.25%. Una fracción de compromiso alto en un fondo privado puede obtener hasta el rendimiento máximo disponible del 5,5 %, un 30 % más de rendimiento que los fondos comunitarios de compromiso bajo. 
 
-The R/(1+a0) term guarantees that small pools will not earn the same fraction of the reserve as large pledged pools. Currently, approximately 1.25B₳ is earning full rewards in 19 pools. If left unchanged over time custodial wealth management companies will be able to offer materially higher yields than individuals. Wave financial is an example of a company currently providing this business model to clients. Eternl/ccvalut is introducing multi-signature features to allow many individuals to collectively pledge to pools. Over time this difference results in two different classes of stakeholders and erodes the decentralized self-custodial appeal of Cardano.
+El término R/(1+a0) garantiza que los fondos comunes pequeños no ganarán la misma fracción de la reserva que los fondos grandes comprometidos. Actualmente, aproximadamente 1.25B₳ obtienen recompensas completas en 19 grupos. Si no se modifican a lo largo del tiempo, las empresas de gestión patrimonial de custodia podrán ofrecer rendimientos sustancialmente más altos que los particulares. Wave Financial es un ejemplo de una empresa que actualmente ofrece este modelo de negocio a los clientes. Eternl/ccvault está introduciendo funciones de firmas múltiples para permitir que muchas personas se comprometan colectivamente con los grupos. Con el tiempo, esta diferencia da como resultado dos clases diferentes de partes interesadas y erosiona el atractivo de auto custodia descentralizado de Cardano.
 
-## The danger of ‘just increase k’
+## El peligro de “solo incrementa k”
 
-Forcing the k-parameter to be radically different from the effective decentralization, k-effective, of the network has resulted in unintended consequences. When k was increased large groups created new pools to retain delegators. If the k-parameter is increased without updating the rewards formula, more large stakeholders will be able to earn full yields by pledging to private pools excluding community delegation.
+Obligar al parámetro k a ser radicalmente diferente de la descentralización efectiva, k-efectivo, de la red ha tenido consecuencias no deseadas. Cuando se incrementó k los grupos grandes crearon nuevas pools para retener a los delegadores. Si se aumenta el parámetro k sin actualizar la fórmula de recompensas, los inversionistas más grandes podrán obtener rendimientos completos comprometiéndose con fondos privados, excluyendo la delegación comunitaria.
 
-Large differences between k-parameter and the k-effective of the network represents a stress on the current state of the network. More pools under the control of a smaller number of groups does not improve decentralization and in fact takes more time and resources to propagate the blockchain to more relays and nodes. A k-effective of >100.0 with an adjustable k-parameter of ~3.0*k-effective is a numerically justifiable long term goal. 
+Las grandes diferencias entre el parámetro k y el k-efectivo de la red representan un estrés en el estado actual de la red. Más pools bajo el control de un número menor de grupos no mejora la descentralización y de hecho toma más tiempo y recursos para propagar el blockchain a más nodos y relays. Un K-efectivo de >100.0 con un k-parámetro ajustable de ~3.0*k-efectivo es una meta a largo plazo numéricamente justificable. 
 
 
 
-# Specification
+# Especificación
 
-## Statement of Principles
+## Declaración de Principios
 
 “Principles matter.” -CH
 
-1. Everybody in the community should be treated fairly from tiny starfish delegators (1-2k₳) to massive blue whales (>100M₳) and exchanges.
-2. Everybody in the community should have the opportunity to on average earn the same yield and there should not be two classes of stakeholders.
-3. There should be a very clear cause and effect relationship between the (a0,k) input parameters and the resulting K-effective decentralization.
-4. The a0 input parameter must require, not incentivize, pool operators to pledge to support community delegation and sybil protection.
-5. The decentralization result will be quantified in terms of group decentralization of block production, not stake saturation relative to pools.
-6. Implementation should be smooth, easy, clear, and beneficial for all stakeholders and operators.
-7. A new reward equation should be computationally simple and elegant.
+1. Todos en la comunidad deberían ser tratados justamente desde pequeños peces delegadores (1-2k₳) a ballenas (>100m₳) y exchanges.
+2. Todos en la comunidad deberían tener la misma oportunidad de en promedio ganar el mismo rendimiento y no debería de existir dos clases de inversionistas.
+3. Debería de haber una relación causa y efecto muy clara entre (a0,k) parámetros ingresados y la descentralización k-efectivo resultante.
+4. El parámetro a0 ingresado debería requerir, no incentivar, a operadores de pools a tener pledge para apoyar los delegadores y protección sibila.
+5. La descentralización resultada será cuantificada en términos de descentralización agrupada de producción de bloques, no saturación de stake relativo hacia pools.
+6. La implementación debería ser fluida, sencilla, clara, y beneficiosa para todos los inversionistas y operadores.
+7.Una ecuación de recompensas nueva debería ser computacionalmente simple y elegante.
 
-## The Proposed Reward Formula
+## La Nueva Fórmula Propuesta
 
-The proposed reward retains the function of k for limiting rewards based on stake but repurposes the a0 parameter for enforcing reward limits based on pledge leverage. The equation equally balances both reward parameters. Instead of a0 ranging from 0.0 to infinity the a0 parameter is intended to range from 10,000.0 down to 1.0. An a0 value of 100.0 would require pools to pledge 1.0% of stake and an a0 of 1.0 would require all pools to be 100.0% pledged.
+La propuesta ecuación de recompensas retiene la función de k para recompensas limitadas basadas en stake, pero le da un nuevo propósito al parámetro a0 para hacer cumplir recompensas limitadas basadas en la ventaja de pledge. La ecuación balancea equitativamente ambos parámetros de recompensas. En vez de a0 variando de 0.0 a infinito, el parámetro a0 es destinado a variar de 10,000.0 hasta 1.0. Un a0 con valor de 100 requeriría pools a hacer pledge 1% del stake, y un a0 de 1.0 requeriría todas las pools tener 100.0% pledge.
 
 <img src="new equation.png" width="400">
 
-R = ( reserve * rho + fees )( 1.0 - tau )
+R = ( reserva * rho + cobros )( 1.0 - tau )
 
 r( sigma, lambda ) = R * min{ sigma, a0 * lambda, 1/k }
 
 
-The new equation is computationally simple and purposefully does not use logarithms, exponents, or geometric curves. Instead of an incentive based tradeoff between egalitarian rewards and a perceived Sybil resilience the new equation enforces both egalitarian rewards and pledge-based Sybil resilience. A simple flat egalitarian yield ceiling with pledge leverage enforcement for Sybil defense has a profound psychological effect: Stakeholders know there is no way to game the system for yield, either individually or collectively with governance, and pledge is absolutely mandatory. Without any engineered bias Cardano decentralization would converge to the diversity of the underlying community, services, and stakeholder distribution. If this proposal is eventually adopted changes in community diversity, not changes in a formula or parameters, would change decentralization.
+La nueva ecuación es computacionalmente simple y no usa logaritmos a propósito, exponentes, o curvas geométricas. En vez de un incentivo basado en costo-beneficios entre recompensas igualitarias y una resiliencia sibila percibida, la nueva ecuación hace cumplir las recompensas igualitarias y resiliencia sibila basada en pledge por igual. Un límite en rendimiento egalitario simple con aplicación de ventaja en pledge para defensa sibila tiene un profundo efecto psicológico: Stakeholders saben que no hay manera de jugar el sistema, ya sea individualmente o colectivamente con gubernatura, y pledge es absolutamente mandatorio. Sin alguna parcialidad artificial, la descentralización de Cardano se fusionaría a la diversidad de la comunidad, servicios, y distribución de stakeholders. Si esta propuesta se adopta eventualmente, cambios en la diversidad de la comunidad, no cambios en la fórmula o parámetros, cambiaría la descentralización.
 
 
-# Rationale
+# Razonamiento
 
-## Recast of a0
+## Reforma de a0
 
-The a0 parameter will be redefined to establish a maximum pledge leverage before limiting rewards, similar to the k parameter for pool size. Pledge leverage establishes a different ‘saturation point’ for each pool based on its pledge. The recast a0 parameter enforces the principle that growing pledge is absolutely required to support growing community delegation. This change will directly align the a0 parameter for protecting the network from Sybil behavior. The pledge leverage factor provides an enforcable limit on sybil actors and their maximum return on invested capital. Pledge will not be a statistically unnoticed slight incentive used only by large private stakeholders. Community governance to adjust leverage factor a0 would be the preferred mechanism to constrain sybil behavior. 
+El parámetro a0 será redefinido para establecer un pledge máximo antes de limitar recompensas, similar al parámetro k de tamaño de pools. La ventaja de pledge establece un ‘punto de saturación’ diferente por cada pool basado en su pledge. La reforma del parámetro a0 hace cumplir el principio que pledge incrementando es absolutamente requerido para apoyar la delegación de la comunidad en crecimiento. Este cambio alinea el parámetro a0 para proteger la red de comportamientos sibilos. El factor de la ventaja de pledge provee un límite de enforzamiento en actores sibilos y su retorno máximo en capital invertido. Pledge no será un incentivo estadísticamente muy apenas reconocible usado solo por grandes inversionistas privados. El mecanismo preferido para constreñir comportamiento sibilo sería gobernanza de la comunidad para ajustar el factor de ventaja a0. 
 
-The new a0 parameter will range from 1,000.0 to 1.0. The initial value of the maximum pledge leverage ratio a0 should initially be set conservatively high (>=100.0) and optionally decreased slightly over time to a healthy equilibrium by community governance. At (a0=100, k=500) approximately 680k₳ pledge would be required to support a fully saturated pool. 
+El nuevo parámetro a0 va a variar de 1000.0 a 1.0. El valor inicial de la proporción a0 en pledge máximo debería inicialmente ser establecida conservativamente alto en (>=100.0) y opcionalmente disminuida conforme avanza el tiempo a un equilibrio saludable por gobernancia de la comunidad. En (a0=100, k=500) aproximadamente 680k₳ pledge sería requerido para apoyar un pool totalmente saturado. 
 
-## The new reward equation
+## La nueva ecuación de recompensas
 
-The proposed reward formula should be visualized on a linear(yield) vs log(saturation) scale independent of k. The chart below shows the field of possible outcomes for various levels of pledge and stake spanning more than 3 orders of magnitude. The effect of a recast a0 becomes obvious, pool saturation will be limited first by pledge amount and then eventually by k. A very important feature of this relationship is that 0₳ pledge will always result in 0₳ rewards. At a0=100.0 to support a 100.0% saturated stake pool 1.0% pledge will be required.
+La nueva fórmula propuesta debería ser visualizada en una escala (rendimiento)-lineal vs log(saturación) independiente de k. La Figura abajo demuestra el campo de posibles resultados en varios niveles de pledge y stake extendiéndose más de 3 órdenes de magnitud. El efecto de una reforma de a0 se hace obvia, la saturación de pool será limitado primero por pledge y eventualmente por k. Una característica muy importante de esta relación es que 0₳ pledge resultará siempre en 0₳ recompensas. En a0=100.0 para apoyar un stake pool 100% saturado, 1.0% pledge será siempre requerido.
 
 <img src="a0 100 minfee 30.png">
 
-## The new reward equation without a minimum fee
+## La nueva ecuación de recompensas sin el cobro mínimo
 
 <img src="a0 100 minfee 0.png">
 
-## The new reward equation zone
+## La zona de ecuación de recompensas nueva
 
 <img src="stake vs leverage proposed.png">
 
-## The yield ceiling
+## El límite de rendimiento
 
-The new equation is purposefully designed so that stakeholders of dramatically different size can all reach the exact same maximum yield. The yield ceiling feature prevents the formation of two classes of stakeholders and removes the economic benefits of custodial centralization. The yield ceiling is the ‘egalitarian reward’ described but not implemented by the original paper.
+La nueva ecuación es diseñada a propósito para que inversionistas de tamaños dramáticamente diferentes puedan todos alcanzar el mismo rendimiento máximo. La característica del límite de rendimiento previene la formación de dos clases de inversionistas y remueve el beneficio económico de la centralización. El límite de rendimiento es la “recompensa igualitaria” descrita pero no implementada por el documento original.
 
-With the minFee < 30 once a pool grows to >0.5% of saturation the intermittent rewards will, on average, provide a competitive yield for delegators at >5.0%. At k=500 and a0=100 this corresponds to a pool size 500k₳ with a minimum pledge of only 5k₳. The yield ceiling is also compatible with a potential future implementation of the Conclave collective stake pool concept. Because of the yield ceiling large collective stake pools will only provide more predictable returns, not a materially larger yield which would compete with smaller independent pools.
+Con el cobro mínimo <30 ya que un pool crezca a >0.5% de saturación, las recompensas intermitentes van a, en promedio, proveer un rendimiento competitivo para delegadores en >5.0%. En k=500 y a0=100 esto corresponde a un tamaño de pool de 500k₳ con un pledge mínimo de solo 5k₳. El límite de rendimiento también es compatible para una implementación potencial en el futuro del concepto de un pool cónclave colectivo. Por el límite de rendimiento, stake pools colectivos grandes solo proveerán más retornos predecibles, no un rendimiento materialmente más grande, el cual competiría con pools pequeños independientes.
 
-## A small pool advantage
+## Una ventaja de pools pequeños
 
-The winners of block forks and slot battles are determined by which pool has a lower VRF score. If multi-pool operators consolidate to improve network efficiency and reduce operating costs a slight advantage will be in favor of all smaller pools. Smaller pools will also have a slight advantage against future collective stake pools. This advantage is not well known but it does slightly bias in favor of smaller pools.
+Los ganadores de forks de bloques y batallas por slots son determinados por cual pool tiene un puntaje VRF más bajo. Sí operadores de multi-pools se consolidan para mejorar la eficiencia de la red y reducir costos de operación, se les daría una pequeña ventaja a favor de los pools pequeños. Los pools pequeños también tendrán una ligera ventaja ante futuros pools colectivos. Esta ventaja no es bien conocida pero le favorece a pools pequeños.
 
-## The economic motivations of large stakeholders and collective pools
+## La motivación económica de accionistas grandes y pools colectivos
 
-The new formula will not decrease the yields of any large stakeholders pledging to private pools. Large ADA stakeholders such as exchanges, liquidity pools, or smart contracts would not be required to pledge a vast majority of those holdings to earn yields currently only achievable with fully pledged pools. This property improves overall liquidity. The only economic motivation remaining for groups with large stake including founder(s), founding organizations, exchanges, investment capital, trusts, and venture capital would be to enhance the value of the entire network by dividing delegation to secure diversification.
+La nueva fórmula no disminuirá los rendimientos de las grandes partes interesadas que se comprometan con los fondos privados. Los grandes inversionistas de ADA, como los exchanges, los fondos de liquidez o los contratos inteligentes, no estarían obligados a comprometer la gran mayoría de esas tenencias para obtener rendimientos que actualmente solo se pueden lograr con pools totalmente en pledge. Esta propiedad mejora la liquidez en general. La única motivación económica que queda para los grupos con una gran participación, incluidos los fundadores, las organizaciones fundadoras, los intercambios, el capital de inversión, los fideicomisos y el capital de riesgo, sería asegurar la diversificación y mejorar el valor de toda la red dividiendo la delegación para asegurar diversificación.
 
-The large stakeholders who are able to divide their stake to dozens of pools will also achieve more fault tolerance than self-operating a small number of centralized private pools. A number of wallets including Eternl/ccvault are offering the capability to divide stake delegation to many pools. This design decision aligns the interest of the largest stakeholders with the interests of the whole community.
+Los grandes inversionistas que pueden dividir su participación en docenas de pools también lograrán una mayor diversificación de recompensas y tolerancia a fallas que la auto operación de una pequeña cantidad de pools privados centralizados ofrecerían. Varias billeteras, incluidas Eternl/ccvault, ofrecen la habilidad de dividir la delegación de participación en muchos grupos. Esta decisión de diseño alinea el interés de las principales partes interesadas con los intereses de toda la comunidad.
 
-## Relevant prior CIP proposals and drafts
+## Propuestas CIP relevantes y borradores
 
 1. https://cips.cardano.org/cips/cip7/
 2. https://github.com/cardano-foundation/CIPs/pull/163
@@ -235,62 +237,62 @@ The large stakeholders who are able to divide their stake to dozens of pools wil
 5. https://forum.cardano.org/t/cip-change-the-reward-formula/33615
 6. https://forum.cardano.org/t/an-alternative-to-a0-and-k/42784
 
-## Methods and paradigms for equation validation
+## Métodos y paradigmas para validación de ecuaciones
 
-To validate any reward equation simulations must consider that an entity can choose to delegate to another entity, operate one stake pool, or operate many stake pools. Any new equation should be compared to the current equation with a0=0.3 and the current equation with minFee=0, a0=0.0. A large number of entities (>100000) should be simulated for each trial of each equation. Additionally, during each epoch of each simulation for each equation block production could be sampled from a normal distribution. Block production and rewards have statistical uncertainty.
+Para validar cualquier simulación de ecuación de recompensas, se debe considerar que una entidad pueda escoger delegar a otra entidad, operar una stake pool, u operar varias stake pools. Cualquier nueva ecuación debe ser comparada a la ecuación actual con a0=0.3 y la ecuación actual con minFee=0, a0=0.0. . Un gran número de entidades (>100000) debe simularse para cada ensayo de cada ecuación. Además, durante cada epoch de cada simulación para cada bloque de ecuación, la producción podría mostrarse a partir de una distribución normal. La producción de bloques y las recompensas tienen incertidumbre estadística.
 
 ```
-Each equation:
-  Each epoch:
-    sample block production (rewards) per pool from a normal distribution
-    Each entity may choose to:
-      create/retire 1 or more pools
-      adjust the fee/margin structure of their pool(s)
-      delegate to the pool of a different entity
+Cada ecuación:
+  Cada epoch:
+    Producción de bloque de muestra (recompensas) por pool de una distribución normal
+    Cada entidad puede decidir a:
+      crear/retirar 1 o mas pools
+      Ajustar la estructura del cobro/margen de (s)us pool(s)
+      Delegar a la pool de una entidad diferente
 ```
 
-For each equation in consideration the average (and variation) of the nakamoto coefficient, k-effective coefficient (or an entity/group based equivalent), and a sybil coefficient shall be computed for every epoch until conclusion. The sybil coefficient would quantify the fraction of stake controlled by all entities operating multiple pools excluding regulated businesses such as exchanges.
+Para cada ecuación en consideración, el promedio (y la variación) del coeficiente de nakamoto, el coeficiente k-efectivo (o un equivalente basado en una entidad/grupo) y un coeficiente de sibila debería ser calculada para cada época hasta la conclusión. El coeficiente sibilo cuantificaria la fracción de stake controlado por todas las entidades operando muti pools, excluyendo negocios regulados como los exchanges.
 
-# Backwards compatibility
+# Compatibilidad reversa
 
-Implementation will occur in two distinct phases with the first phase being only parameter changes requiring no hard fork. During this first phase any changes will be reversible. The second phase will require a hard fork.
+La implementación ocurrirá en dos fases distintas, siendo la primera fase solo cambios de parámetros que no requieren una bifurcación dura. Durante esta primera fase cualquier cambio será reversible. La segunda fase requerirá un hard fork.
 
-# Path to Active
+# Camino a Activación
 
-The implementation of this proposal must be smooth, staged, deliberate, and well communicated through advertising and education. Each change in the implementation schedule should include clear communication to the community on expectations. Transparent education on how the parameters will work and the effect on rewards is important.
+La implementación de esta propuesta debe ser fluida, escenificada, deliberada y bien comunicada a través de publicidad y educación. Cada cambio en el horario de implementación debe incluir una comunicación clara a la comunidad en expectativas. La educación transparente sobre cómo funcionarán los parámetros y el efecto sobre las recompensas es importante.
 
-1. Get statements of support from a large fraction of the Cardano community.
+1. Conseguir declaraciones de apoyo de una gran parte de la comunidad de Cardano.
 
-Although we haven't entered the Voltaire era yet, we should still reach community concensus.
+A pesar de aún no haber entrado a la era Voltaire, aun así deberíamos alcanzar consenso de la comunidad.
 
-2. Reduce minFee from 340₳ to 0₳.
+2. Reducir cobro mínimo de 340₳ a 0₳.
 
-Reducing the mandatory minimum fee to 0 will allow smaller pools to become more competitive while allowing each individual pool to select an appropriate fixed fee.
+Reduciendo el cobro mínimo obligatorio a 0 permitirá a pools pequeños ser más competitivos mientras se deja a cada pool independiente seleccionar un cobro fijo apropiado.
 
-3. Wait 5 to 10 epochs, measure decentralization, gather community feedback.
+3. Esperar 5 - 10 epochs, evaluar descentralización, recaudar comentarios de la comunidad.
 
-4. Get more statements of support from a larger fraction of the Cardano community.
+4. Conseguir más declaraciones de apoyo de una gran parte de la comunidad de Cardano.
 
-5. Reduce k from 500 to approximately 3 times K-effective and decrease a0 from 0.3 to 0.1.
+5. Reducir k de 500 a aproximadamente 3 veces K-efectivo y disminuir a0 de 0.3 a 0.1.
 
-This will improve yields for community delegators and allow multipools time to consolidate pledge, consolidate delegation, and retire unnecessary pools. Group consolidation will not decrease decentralization of group block production, will improve network efficiency, will allow for unifying pledge, and make life easier for operators. It’s a rare win-win-win.
+Esto mejorará rendimientos para la comunidad de delegadores y permitirá a multi pools tiempo para consolidar pledge, delegación, y retirar pools innecesarios.
 
-6. Wait 5 to 10 epochs, measure decentralization, measure pledge concentration, and gather community feedback.
+6. Esperar 5 - 10 epochs, evaluar descentralización, recaudar comentarios de la comunidad.
 
-7. HARDFORK implementation of the new formula enforcing pledge leverage diminishing returns ( a0 >= 100, k = 3.0*k-effective ).
+7. Implementación HARDFORK de la nueva fórmula dando a cumplir retornos disminuyentes de la ventaja de pledge (a0 >= 100, k = 3.0*k-efectivo).
 
-8. Measure decentralization, gather community feedback.
+8. Evaluar descentralización, recaudar comentarios de la comunidad.
 
-9. Slightly adjust a0 and k by approximately 5% every 10 epochs until the end of Voltaire.
+9. Ajustar a0 y k por aproximadamente 5% cada 10 epochs hasta el final de Voltaire.
 
-10. After Voltaire adjust a0 and k annually/bi-annually by community vote.
+10. Después de Voltaire, ajustar a0 y k anualmente/bi-anual por voto de la comunidad.
 
 # Copyright
 
 Copyright 2022 Michael Liesenfelt
 
-This CIP is licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+Este CIP tiene licencia bajo [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
+Traducido en Español por: Juan Montano, DOT5 SPO
+# Declaración de Conflicto de Interés 
 
-# Conflict of Interest Declaration 
-
-The author is employed full time as a Research Assistant Professor in Nuclear Engineering at the University of Tennessee, earns no revenue from the Cardano ecosystem, does not operate a stake pool, is not seeking Cardano Foundation stakepool delegation support, and owns 23k ADA delegated to the THOR stake pool.
+El autor es empleado por tiempo completo como Profesor de Asistente en Investigación de Ingeniería Nuclear en la Universidad de Tennessee, recibe cero ganancias del ecosistema de Cardano, no opera ningún stake pool, y no busca apoyo de delegación de la Fundación de Cardano, tiene 23,000 ADA delegados a THOR stake pool.
