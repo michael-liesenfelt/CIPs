@@ -31,7 +31,7 @@ Post-History: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentra
 
 Improving decentralization is absolutely necessary for the long term health and growth of the Cardano ecosystem. The current reward formula has resulted in a stable but stagnant level of decentralization. With the benefit of hindsight over the last year the intent of $(a0, k)$ has not resulted in the desired decentralization outcome. This CIP provides the justification, methods, metrics, and implementation schedule for an improvement program to increase decentralization of the Cardano network.
 
-The proposed reward equation retains the function of k for diminishing rewards based on stake but repurposes the a0 parameter for enforcing diminishing rewards based on pledge leverage. The proposed equation enforces a set of principles to ensure stakeholders of dramatically different size can all reach the same maximum yield. The yield ceiling feature prevents the formation of two classes of stakeholders and removes some of the benefits of centralization. The economic motivations of the largest stakeholders will be aligned with decentralization, reward diversification, fault tolerance, and ensuring the sybil protection of the entire community.
+The proposed reward equation retains the function of k for diminishing rewards based on stake but repurposes the $a0$ parameter for enforcing diminishing rewards based on pledge leverage. The proposed equation enforces a set of principles to ensure stakeholders of dramatically different size can all reach the same maximum yield. The yield ceiling feature prevents the formation of two classes of stakeholders and removes some of the benefits of centralization. The economic motivations of the largest stakeholders will be aligned with decentralization, reward diversification, fault tolerance, and ensuring the sybil protection of the entire community.
 
 
 # Motivation
@@ -48,7 +48,15 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 
 (2) https://iohk.io/en/blog/posts/2018/10/29/preventing-sybil-attacks/
 
-<img src="equation1.png" width="400"> (1)
+$ Ref (1) $
+$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} (weight_g)\bigg(\frac{1}{k_g}\bigg) $$
+
+$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group \space stake_g}{total \space stake}\bigg) \bigg(\frac{group \space stake_g}{total \space stake}\bigg)  $$
+
+$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group \space stake_g}{total \space stake}\bigg)^2 $$
+
+
+
 
 ![Figure 1](k-effective.png)
 Figure 1. Historical k-effective from epoch 245 to present.
@@ -74,7 +82,31 @@ The analysis of the current reward formula in [4] equated 1 pool to 1 entity. In
 
 From “4.1 Our RSS construction” of “Reward Sharing Schemes for Stake Pools” [5] the current rewards equation is:
 
-<img src="equation2.png" width="600"> (2)
+$ Ref(2) $
+$$ R = (reserve * \rho + fees)(1-\tau) $$
+
+$$
+r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
+\bigg(  
+\sigma' + \
+\lambda'* \alpha * \frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
+\bigg)  
+$$
+
+$$
+r_k(\sigma,\lambda) = 
+\frac{R}{1+\alpha}* 
+\bigg(  
+min\{\sigma,\frac{1}{k}\} + 
+min\{\lambda,\frac{1}{k}\}
+* \alpha * 
+\frac {min\{\sigma,\frac{1}{k}\} - 
+min\{\lambda,\frac{1}{k}\} * (1-min\{\sigma,\frac{1}{k}\}/
+(1/k)}
+{(1/k)}
+\bigg)
+$$
+
 
 where:
 
@@ -128,9 +160,9 @@ The $a0$ parameter represents the fraction of the rewards $(R/(1+a0))$ which are
 
 <img src="a0 0.0 minfee 0.png">
 
-## The Reality of (a0,k)
+## The Reality of $(a0,k)$
 
-The intent of parameters ($a0$, k) has not been realized. The graph of k-effective shows that increasing k from 150 to 500 did not result in a proportional increase to decentralization. The k parameter is currently $500 / 41 = 12.2$ times larger than the effective decentralization k-effective. In epoch 333  46% of all stake was controlled by non-exchange multi-pool operators. 
+The intent of parameters $(a0, k)$ has not been realized. The graph of k-effective shows that increasing $k$ from 150 to 500 did not result in a proportional increase to decentralization. The k parameter is currently $500 / 41 = 12.2$ times larger than the effective decentralization k-effective. In epoch 333  46% of all stake was controlled by non-exchange multi-pool operators. 
 
 Another important determinant of the ability for small pools to compete with larger pools is the mandatory minimum fee (minFee parameter) which is currently 340₳. This minimum fee is a higher percentage of the total rewards for a small pool compared to a larger pool. It means that delegator yields for a small pool will not exceed 4.0% until the pool has at least 10.0% saturation (currently ~6.8M₳). This is a significant barrier to entry for small pools.
 
