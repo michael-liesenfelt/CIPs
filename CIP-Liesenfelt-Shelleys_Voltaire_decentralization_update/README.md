@@ -97,7 +97,8 @@ $$
 r_k(\sigma,\lambda) = 
 \frac{R}{1+\alpha}* 
 \bigg(  
-min\\{\sigma,\alpha\\}
+
+test
 
 
 \bigg)
