@@ -97,7 +97,8 @@ $$
 r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
 \bigg(  
 \sigma' + \
-\lambda'* \alpha * \frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
+\lambda'* \alpha * \
+\frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
 \bigg)  
 $$
 
