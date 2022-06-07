@@ -99,8 +99,7 @@ r_k(\sigma,\lambda) =
 \bigg(  
 min\\{\sigma,\frac{1}{k}\\} + 
 min\\{\lambda,\frac{1}{k}\\}
-* \alpha * 
-\frac {min\\{\sigma,\frac{1}{k}\\} - min\\{\lambda,\frac{1}{k}\\} * (1-min\\{\sigma,\frac{1}{k}\\}/(1/k)} {(1/k)}
+* \alpha
 \bigg)
 $$
 
