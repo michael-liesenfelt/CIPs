@@ -96,6 +96,9 @@ $$
 $$
 r_k(\sigma,\lambda) = 
 \frac{R}{1+\alpha}* 
+\bigg(  
+test
+\bigg)
 $$
 
 
