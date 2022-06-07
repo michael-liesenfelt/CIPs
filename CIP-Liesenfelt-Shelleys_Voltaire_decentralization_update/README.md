@@ -96,11 +96,6 @@ $$
 $$
 r_k(\sigma,\lambda) = 
 \frac{R}{1+\alpha}* 
-\bigg(  
-min\\{\sigma,\frac{1}{k}\\} + 
-min\\{\lambda,\frac{1}{k}\\}
-* \alpha
-\bigg)
 $$
 
 
