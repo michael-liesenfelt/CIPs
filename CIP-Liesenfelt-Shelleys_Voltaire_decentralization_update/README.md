@@ -97,11 +97,11 @@ $$
 r_k(\sigma,\lambda) = 
 \frac{R}{1+\alpha}* 
 \bigg(  
-min\{\sigma,\frac{1}{k}\} + 
-min\{\lambda,\frac{1}{k}\}
+min{\sigma,\frac{1}{k}} + 
+min{\lambda,\frac{1}{k}}
 * \alpha * 
-\frac {min\{\sigma,\frac{1}{k}\} - 
-min\{\lambda,\frac{1}{k}\} * (1-min\{\sigma,\frac{1}{k}\}/
+\frac {min{\sigma,\frac{1}{k}} - 
+min{\lambda,\frac{1}{k}} * (1-min{\sigma,\frac{1}{k}}/
 (1/k)}
 {(1/k)}
 \bigg)
@@ -110,7 +110,7 @@ $$
 
 where:
 
-$λ’ = min\{λ,β\}$, $σ’ = min\{σ,β\}$ and $β,α$ are fixed parameters.
+$λ’ = min{λ,β}$, $σ’ = min{σ,β}$ and $β,α$ are fixed parameters.
 
 A natural choice is $β = 1/k$, where $k$ is the target number of pools.
 
