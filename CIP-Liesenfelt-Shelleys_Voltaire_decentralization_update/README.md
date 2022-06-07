@@ -110,7 +110,7 @@ $$
 
 where:
 
-$λ’ = min{λ,β}$, $σ’ = min{σ,β}$ and $β,α$ are fixed parameters.
+$λ’ = min\\{λ,β\\}$, $σ’ = min\\{σ,β\\}$ and $β,α$ are fixed parameters.
 
 A natural choice is $β = 1/k$, where $k$ is the target number of pools.
 
