@@ -55,16 +55,14 @@ $$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group 
 
 $$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group \space stake_g}{total \space stake}\bigg)^2 $$
 
-
-
-
 ![Figure 1](k-effective.png)
 Figure 1. Historical k-effective from epoch 245 to present.
 
 ![Figure 2](k-effective-table.png)
 Figure 2. K-effective table.
 
-## The Intent of $(a0,k)$
+
+## The Intent of (a0,k)
 
 To cite Aggelos Kiayias, Chief Scientist of IOG:
 
@@ -119,7 +117,7 @@ $k = 500$
 
 $α = a0 = 0.3$
  
-The $a0$ parameter represents the fraction of the rewards $(R/(1+a0))$ which are not paid out unless all of the stake is pledged. An $a0$ of 0.3 ensures that **$1.0-1.0/(1.0+0.3) = 23\%$ of the total rewards R will be withheld from low pledge fraction pools and returned to the reserve**. The effect of this formula is that increased pledge results in retaining more of the available rewards R. However, this benefit is not linear, rather it is drastically biased towards the saturation limit. The $\sigma’ = min\{σ,β\}$ term enforces a reward limit based on $k$. Visualizing the resulting field of outcomes at various pledge amounts from 0.00% to 100.0% is necessary. The red dotted line “Max Reward” represents the maximum available yield available at current network stake size.
+The $a0$ parameter represents the fraction of the rewards $(R/(1+a0))$ which are not paid out unless all of the stake is pledged. An $a0$ of 0.3 ensures that **$1.0-1.0/(1.0+0.3) = 23\%$ of the total rewards R will be withheld from low pledge fraction pools and returned to the reserve**. The effect of this formula is that increased pledge results in retaining more of the available rewards R. However, this benefit is not linear, rather it is drastically biased towards the saturation limit. The $\sigma’ = min\\{σ,β\\}$ term enforces a reward limit based on $k$. Visualizing the resulting field of outcomes at various pledge amounts from 0.00% to 100.0% is necessary. The red dotted line “Max Reward” represents the maximum available yield available at current network stake size.
 
 <img src="a0 0.3 minfee 340.png">
 
@@ -159,7 +157,7 @@ The $a0$ parameter represents the fraction of the rewards $(R/(1+a0))$ which are
 
 <img src="a0 0.0 minfee 0.png">
 
-## The Reality of $(a0,k)$
+## The Reality of (a0,k)
 
 The intent of parameters $(a0, k)$ has not been realized. The graph of k-effective shows that increasing $k$ from 150 to 500 did not result in a proportional increase to decentralization. The k parameter is currently $500 / 41 = 12.2$ times larger than the effective decentralization k-effective. In epoch 333  46% of all stake was controlled by non-exchange multi-pool operators. 
 
@@ -177,7 +175,7 @@ The reality of the past 18 months is that pool operators have split pledge acros
 
 The SundaeSwap Initial Stake Offering (ISO) proved that community delegator stake can be very mobile. More than a couple billion in stake centralized into ISO groups. After realizing the popularity of their ISO resulted in a centralization of the network SundaeSwap launched a ‘Reverse’ ISO for the benefit of single pools. The RISO temporarily reversed the centralization trend as a billion ADA was delegated to small pools. The Cardano network reached a decentralization factor of 43.22 in epoch 321. After the RISO these decentralization gains reversed because the underlying incentives of the reward formula have not changed. This proves that the community is engaged and their stake is mobile, especially for yield and gains.
 
-## $a0$: The pledge yield boosting parameter
+## a0: The pledge yield boosting parameter
 
 An intentional design of the current reward equation is to purposefully allow large stakeholders pledging to private pools to earn the maximum possible yields while excluding community delegation. The vast majority of pools with pledge <10% stake saturation have an asymptotic yield currently approaching a maximum yield of 4.25%. A high pledge fraction in a private pool can earn up to the maximum available 5.5% yield, 30% more yield than low pledge community pools. 
 
@@ -211,7 +209,7 @@ The proposed reward retains the function of $k$ for limiting rewards based on st
 
 $$ R = ( reserve * \rho + fees )( 1 - \tau ) $$
 
-$$ r( \sigma, \lambda ) = R * min\bigg\\{ \sigma, a0 * \lambda, \frac{1}{k} \bigg\\} $$
+$$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma, a0 * \lambda, \frac{1}{k} \bigg\\} $$
 
 
 The new equation is computationally simple and purposefully does not use logarithms, exponents, or geometric curves. Instead of an incentive based tradeoff between egalitarian rewards and a perceived Sybil resilience the new equation enforces both egalitarian rewards and pledge-based Sybil resilience. A simple flat egalitarian yield ceiling with pledge leverage enforcement for Sybil defense has a profound psychological effect: Stakeholders know there is no way to game the system for yield, either individually or collectively with governance, and pledge is absolutely mandatory. Without any engineered bias Cardano decentralization would converge to the diversity of the underlying community, services, and stakeholder distribution. If this proposal is eventually adopted changes in community diversity, not changes in a formula or parameters, would change decentralization.
@@ -219,7 +217,7 @@ The new equation is computationally simple and purposefully does not use logarit
 
 # Rationale
 
-## Recast of $a0$
+## Recast of a0
 
 The $a0$ parameter will be redefined to establish a maximum pledge leverage before limiting rewards, similar to the k parameter for pool size. Pledge leverage establishes a different ‘saturation point’ for each pool based on its pledge. The recast $a0$ parameter enforces the principle that growing pledge is absolutely required to support growing community delegation. This change will directly align the $a0$ parameter for protecting the network from Sybil behavior. The pledge leverage factor provides an enforcable limit on sybil actors and their maximum return on invested capital. Pledge will not be a statistically unnoticed slight incentive used only by large private stakeholders. Community governance to adjust leverage factor $a0$ would be the preferred mechanism to constrain sybil behavior. 
 
