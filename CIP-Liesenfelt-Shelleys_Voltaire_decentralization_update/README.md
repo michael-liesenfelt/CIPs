@@ -7,7 +7,7 @@ Status: Draft
 Type: Standards
 Created: 2022-04-04
 License: [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode)
-Post-History: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentralization-update/97685 https://forum.cardano.org/t/minimum-pool-fees-with-a-brief-mention-of-$k$-changes/97002/82
+Post-History: https://forum.cardano.org/t/cip-shelley-s-basho-voltaire-decentralization-update/97685 https://forum.cardano.org/t/minimum-pool-fees-with-a-brief-mention-of-k-changes/97002/82
 ---
 
 # List of Potential Reviewers:
@@ -196,7 +196,7 @@ Large differences between k-parameter and the k-effective of the network represe
 
 ## Statement of Principles
 
-> “Principles matter.” -CH
+“Principles matter.” -CH
 
 1. Everybody in the community should be treated fairly from tiny starfish delegators (1-2k₳) to massive blue whales (>100M₳) and exchanges.
 2. Everybody in the community should have the opportunity to on average earn the same yield and there should not be two classes of stakeholders.
