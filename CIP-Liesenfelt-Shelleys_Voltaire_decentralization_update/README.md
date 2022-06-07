@@ -97,13 +97,10 @@ $$
 r_k(\sigma,\lambda) = 
 \frac{R}{1+\alpha}* 
 \bigg(  
-min{\sigma,\frac{1}{k}} + 
-min{\lambda,\frac{1}{k}}
+min\\{\sigma,\frac{1}{k}\\} + 
+min\\{\lambda,\frac{1}{k}\\}
 * \alpha * 
-\frac {min{\sigma,\frac{1}{k}} - 
-min{\lambda,\frac{1}{k}} * (1-min{\sigma,\frac{1}{k}}/
-(1/k)}
-{(1/k)}
+\frac {min\\{\sigma,\frac{1}{k}\\} - min\\{\lambda,\frac{1}{k}\\} * (1-min\\{\sigma,\frac{1}{k}\\}/(1/k)} {(1/k)}
 \bigg)
 $$
 
@@ -212,7 +209,7 @@ The proposed reward retains the function of $k$ for limiting rewards based on st
 
 $$ R = ( reserve * \rho + fees )( 1 - \tau ) $$
 
-$$ r( \sigma, \lambda ) = R * min\bigg\{ \sigma, a0 * \lambda, \frac{1}{k} \bigg\} $$
+$$ r( \sigma, \lambda ) = R * min\bigg\\{ \sigma, a0 * \lambda, \frac{1}{k} \bigg\\} $$
 
 
 The new equation is computationally simple and purposefully does not use logarithms, exponents, or geometric curves. Instead of an incentive based tradeoff between egalitarian rewards and a perceived Sybil resilience the new equation enforces both egalitarian rewards and pledge-based Sybil resilience. A simple flat egalitarian yield ceiling with pledge leverage enforcement for Sybil defense has a profound psychological effect: Stakeholders know there is no way to game the system for yield, either individually or collectively with governance, and pledge is absolutely mandatory. Without any engineered bias Cardano decentralization would converge to the diversity of the underlying community, services, and stakeholder distribution. If this proposal is eventually adopted changes in community diversity, not changes in a formula or parameters, would change decentralization.
