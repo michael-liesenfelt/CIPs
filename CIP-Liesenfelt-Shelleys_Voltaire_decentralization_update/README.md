@@ -94,13 +94,11 @@ r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}*
 $$
 
 $$
-r_k(\sigma,\lambda) = \frac{R}{1+\alpha}* 
+r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
 \bigg(  
-
-test
-
-
-\bigg)
+\sigma' + \
+\lambda'* \alpha * \frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
+\bigg)  
 $$
 
 
