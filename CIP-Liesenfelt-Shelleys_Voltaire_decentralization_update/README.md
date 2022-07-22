@@ -49,11 +49,7 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 (2) https://iohk.io/en/blog/posts/2018/10/29/preventing-sybil-attacks/
 
 $ Ref (1) $
-$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} (weight_g)\bigg(\frac{1}{k_g}\bigg) $$
-
-$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group \space stake_g}{total \space stake}\bigg) \bigg(\frac{group \space stake_g}{total \space stake}\bigg)  $$
-
-$$ \frac{1}{k_{effective}} = \sum_{group \space g}^{G(~2436)} \bigg(\frac{group \space stake_g}{total \space stake}\bigg)^2 $$
+![Equation Set 1](equation1.png)
 
 ![Figure 1](k-effective.png)
 Figure 1. Historical k-effective from epoch 245 to present.
@@ -80,29 +76,7 @@ The analysis of the current reward formula in [4] equated 1 pool to 1 entity. In
 From “4.1 Our RSS construction” of “Reward Sharing Schemes for Stake Pools” [5] the current rewards equation is:
 
 $ Ref(2) $
-$$ R = (reserve * \rho + fees)(1-\tau) $$
-
-$$
-r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
-\bigg(  
-\sigma' + \
-\lambda'* \alpha * \frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
-\bigg)  
-$$
-
-$$
-r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
-\bigg(  
-min\\{\sigma,\frac{1}{k}\\} + \
-min\\{\lambda,\frac{1}{k}\\}* \alpha * \
-\frac {min\\{\sigma,\frac{1}{k}\\} - \
-min\\{\lambda,\frac{1}{k}\\} * \
-(1-min\\{\sigma,\frac{1}{k}\\}/ \
-(1/k)}
-{(1/k)}
-\bigg)  
-$$
-
+![Equations Set 2](equation2.png)
 
 where:
 
