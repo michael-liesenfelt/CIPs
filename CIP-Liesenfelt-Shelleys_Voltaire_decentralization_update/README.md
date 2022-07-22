@@ -49,7 +49,7 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 (2) https://iohk.io/en/blog/posts/2018/10/29/preventing-sybil-attacks/
 
 $ Ref (1) $
-<center><img src="equation1.png" width="400"></center>
+<center><img align="center" src="equation1.png" width="400"></center>
 
 ![Figure 1](k-effective.png)
 Figure 1. Historical k-effective from epoch 245 to present.
