@@ -49,7 +49,7 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 (2) https://iohk.io/en/blog/posts/2018/10/29/preventing-sybil-attacks/
 
 $ Ref (1) $
-![Equation Set 1](equation1.png)
+<center><img src="equation1.png" width="400"></center>
 
 ![Figure 1](k-effective.png)
 Figure 1. Historical k-effective from epoch 245 to present.
@@ -78,13 +78,14 @@ From “4.1 Our RSS construction” of “Reward Sharing Schemes for Stake Pools
 $ Ref(2) $
 ![Equations Set 2](equation2.png)
 
+
 where:
 
-$λ’ = min\\{λ,β\\}$, $σ’ = min\\{σ,β\\}$ and $β,α$ are fixed parameters.
+<img src="equation2-supporting.png" width="200">
 
-A natural choice is $β = 1/k$, where $k$ is the target number of pools.
+A natural choice is $β = 1/k$, where $k$ is the target number of pools, and $β,α$ are fixed parameters.
 
-and the following are current protocol parameters:
+The following are current protocol parameters:
 
 $k = 500$
 
@@ -180,10 +181,7 @@ Large differences between k-parameter and the k-effective of the network represe
 
 The proposed reward retains the function of $k$ for limiting rewards based on stake and introduces parameter $L$ for enforcing reward limits based on pledge leverage. The equation equally balances both reward parameters. The pledge leverage parameter $L$ is intended to range from 10,000.0 down to 1.0. An $L$ value of 100.0 would require pools to pledge 1.0% of stake and an $L$ of 1.0 would require all pools to be 100.0% pledged.
 
-$$ R = ( reserve * \rho + fees )( 1 - \tau ) $$
-
-$$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma, L * \lambda, \frac{1}{k} \bigg\\} $$
-
+<center><img src="equation3-newRewardEq.png" width="400"></center>
 
 The new equation is computationally simple and purposefully does not use logarithms, exponents, or geometric curves. Instead of an incentive based tradeoff between egalitarian rewards and a perceived Sybil resilience the new equation enforces both egalitarian rewards and pledge-based Sybil resilience. A simple flat egalitarian yield ceiling with pledge leverage enforcement for Sybil defense has a profound psychological effect: Stakeholders know there is no way to game the system for yield, either individually or collectively with governance, and pledge is absolutely mandatory. Without any engineered bias Cardano decentralization would converge to the diversity of the underlying community, services, and stakeholder distribution. If this proposal is eventually adopted changes in community diversity, not changes in a formula or parameters, would change decentralization.
 
@@ -262,7 +260,7 @@ For each equation in consideration the average (and variation) of the nakamoto c
 
 Proposed Unbiased Egalitarian Equation:
 
-$$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma , L * \lambda, \frac{1}{k} \bigg\\} $$
+<img src="equation4-newRewardsEq.png" width="300">
 
 - with $k = 150$ and $L = 50$
 - with $k = 150$ and $L = 100$
@@ -276,7 +274,7 @@ $$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma , L * \lambda, \frac{1}{k} \b
 
 Biased variation of the proposed equation:
 
-$$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma * ( 1 - a0 * \sigma * k )  , L * \lambda, \frac{1}{k} \bigg\\} $$
+<img src="equation4-newRewardsEqBiased.png" width="400">
 
 - with $k = 150$, $a0=0.05$, and $L = 50$
 - with $k = 150$, $a0=0.05$, and $L = 100$
@@ -290,13 +288,7 @@ $$ r_k( \sigma, \lambda ) = R * min\bigg\\{ \sigma * ( 1 - a0 * \sigma * k )  , 
 
 Current Equation Form:
 
-$$
-r_k(\sigma,\lambda) = R*\frac{1}{1+\alpha}* 
-\bigg(  
-\sigma' + \
-\lambda'* \alpha * \frac{\sigma'-\lambda'*(1-\sigma'/\beta)}{\beta}
-\bigg)  
-$$
+<img src="equation4-currentEq.png" width="400">
 
 - with $k = 150$ and $a0 = 0.0$
 - with $k = 500$ and $a0 = 0.0$
