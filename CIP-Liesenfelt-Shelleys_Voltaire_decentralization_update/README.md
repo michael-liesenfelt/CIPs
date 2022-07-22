@@ -50,7 +50,7 @@ The Cardano network currently produces ~21,600 blocks per epoch with ~2400 group
 
 $ Ref (1) $
 <p align="center">
- <img src="equation1.png" width="400">
+ <img src="equation1.png" width="500">
 </p>
 
 ![Figure 1](k-effective.png)
@@ -85,7 +85,7 @@ where:
 
 <img src="equation2-supporting.png" width="250">
 
-A natural choice is $β = 1/k$, where $k$ is the target number of pools, and $β,α$ are fixed parameters.
+A natural choice is $β = 1/k$, where $k$ is the target number of pools, and $k,α$ are fixed parameters.
 
 The following are current protocol parameters:
 
