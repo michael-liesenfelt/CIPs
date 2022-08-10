@@ -266,44 +266,46 @@ When pledge becomes the most important factor for total pool size, lower leverag
 
 ### Ranking Equation
 
-The recommended ranking equation starts with the highest score of 10. The pools are down-ranked solely based on leverage and fee factors.
+The recommended ranking equation starts with the highest score of 10. The pools are down-ranked solely based on leverage, saturation, and fee factors.
 
     //equation
-    ranking_score = 10 - leverage_factor_term - fee_factor_term
+    ranking_score = 10 - max{ leverage_factor, saturation_factor } - fee_factor
 
     //variables
-    leverage_factor_term = 10 * max{ (pool_leverage/L)^A, (pool_stake/saturation_stake)^B }
-    fee_factor_term = C * pool_fee_margin
+    leverage_factor = 10 * (pool_leverage/L)^A
+    saturation_factor = 2 * (pool_stake/(saturation_stake * C))^B
+    fee_factor = D * pool_fee_margin
 
     //parameters
     - A is 2.0, has range (0,10.0), can be tweaked
-    - B is 2.0, has range (0,10.0), can be tweaked
+    - B is 5.0, has range (0,10.0), can be tweaked
+    - C is 0.9, has range (0,2.0), can be tweaked
+    - D is 50, has range (0-100) ish to be harsh, can be tweaked
     - pool_leverage = delegation / pledge
     - pool_stake = pledge + delegation
-    - saturation_stake = pool_size soft-cap (e.g., 68M₳ based on k-parameter)
-    - C is 50, has range (0-100) ish to be harsh, can be tweaked
+    - saturation_stake = total_live_stake/k (e.g. 68M₳ "soft-cap upper limit")
     - pool_fee_margin is in range (0-100)% (fixed fee + margin combined)
 
 To evaluate rank using the current reward scheme:
 
     //current reward scheme only
-    ranking_score = 10 - leverage_factor_term - fee_factor_term - fixed_fee_factor
+    ranking_score = 10 - max{ leverage_factor , saturation_factor } - fee_factor - fixed_fee_factor
 
     //variables
     //if fee = minFee, term drops out
     //if fee > minFee, term nonzero but loses relevance w/ increased stake
     //fixed fee matters less to rewards as stake grows, so too here
-    fixed_fee_factor = D * (fee-minFee) / stake 
+    fixed_fee_factor = E * (fee-minFee) / stake 
 
     //parameters
-    - D is 50, has range (0,100), can be tweaked
+    - E is 100, has range (0,100_000), can be tweaked
     - fee cannot be less than minFee
 
 ### Ranking System
 
 The recommended pool ranking system will be a descending sorted list of ranking scores, with the highest score at the top:
 
-    ranking = sort(ranking_score, order=descending)
+    ranking = sort( round_up(ranking_score), order=descending)
 
 The ranking score is intentionally simple and familiar. Pools will be ranked out of a score of 0-10, and "Graded" for ease per below. There can be many pools having the same ranking score.  All wallets should make transparent the knock-down factors that drove the pool's score.
 
@@ -335,7 +337,7 @@ A leverage based ranking system will create interesting pool free market busines
 
 5. Reset: With increased rewards (savings) from accumulation/sustainment, a pool can increase pledge to decrease leverage, increase pool size even more, lowers fees, and climb back to Grade A "Growth" Territory. Repeat.
 
-With needing to grow pledge to grow pool size and regain better ranking, the business cycle is cyclical indefinitely, until the pool reaches max saturation based on the k-parameter.
+With the need to grow pledge to grow pool size and regain better ranking, the business cycle is cyclical indefinitely until the pool reaches max saturation based on the k-parameter.
 
 ## Oversaturation Attacks (OA)
 
