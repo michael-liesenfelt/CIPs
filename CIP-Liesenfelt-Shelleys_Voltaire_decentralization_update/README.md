@@ -301,41 +301,16 @@ To evaluate rank using the current reward scheme:
     - E is 100, has range (0,100_000), can be tweaked
     - fee cannot be less than minFee
 
-### Ranking System
+#### A Pool's Life-Cycle
 
-The recommended pool ranking system will be a descending sorted list of ranking scores, with the highest score at the top:
+A leverage-based ranking system will create interesting pool free market business dynamics. It's envisioned a pool will undergo "business life-cycles" based on price supply and demand (fees) and leverage (pledge raising to grow the business) as described below. Currently, the yield-based pool ranking creates a market based on fees (driving yield), but not leverage, thus pools  can grow indefinitely with no "leverage ranking costs".
 
-    ranking = sort( round_up(ranking_score), order=descending)
-
-The ranking score is intentionally simple and familiar. Pools will be ranked out of a score of 0-10, and "Graded" for ease per below. There can be many pools having the same ranking score.  All wallets should make transparent the knock-down factors that drove the pool's score.
-
-| Grade | Score |
-| --- | --- |
-| A | 10-9 |
-| B | 8-7 |
-| C | 6-5 |
-| D | 4-3 |
-| F | 2-0 |
-
-### A Pool's Life-Cycle
-
-A leverage based ranking system will create interesting pool free market business dynamics. It's envisioned a pool will undergo "business life-cycles" based on price supply and demand (fees) and leverage (pledge raising to grow the business) as described below. Currently, the yield-based pool ranking creates a market based on fees (driving yield), but not leverage.
-
-**Grade A Territory- Growth**
-
-1. Start-up: Start with a pledge "down-payment", very low leverage, very low fees, become highly ranked.
-
-2. Growth: Gain delegation, leverage starts to grow, eventually some rewards are gained. Equivalent to a "sale" to gain delegators and grow.
-
-**Grade B-C Territory - Sustainment**
-
-3. Sustainment: Raise fees to a moderate, sustainable operating "happy place" level.  Delegators are content, even though the pool loses some ranking from leverage, that is okay, rewards are healthy. Prices (fees) are sustained by the pool's demand and community. Pools can sustain operation here indefinitely if desired by modulating pledge leverage and/or fees.
-
-**Grade D-F Territory - Accumulation**
-
-4. Accumulation: Given success and demand brings a surplus of delegators, high leverage grows, rankings fall. A pool will need to raise fees to 1) gain more rewards to grow pledge and 2) drop in rankings more to deter and maybe lose delegators.  Delegators leave, leverage starts dropping back to healthy levels.
-
-5. Reset: With increased rewards (savings) from accumulation/sustainment, a pool can increase pledge to decrease leverage, increase pool size even more, lowers fees, and climb back to Grade A "Growth" Territory. Repeat.
+_A Leverage-Based Pool's Life-Cycle_
+1. Start-up: Low pledge, very low leverage, very low fees, very highly ranked.
+2. Growth: Gain delegation, leverage grows, rewards gained, high rank.
+3. Sustainment: Raise fees, sustainable operation, moderate ranked.
+4. Accumulation: Delegator surplus, high leverage, raise fees, high rewards, low rank.
+5. Reset: Lower fees, increase pledge, regain low leverage and high rank. Repeat.
 
 With the need to grow pledge to grow pool size and regain better ranking, the business cycle is cyclical indefinitely until the pool reaches max saturation based on the k-parameter.
 
