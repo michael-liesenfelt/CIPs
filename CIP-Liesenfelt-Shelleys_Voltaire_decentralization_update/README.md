@@ -390,20 +390,31 @@ For each equation in consideration the average (and variation) of the nakamoto c
 - with $k = 500$ and $a0 = 0.6$
 - with $k = 1000$ and $a0 = 0.6$
 
-### CIP-7 Equation Form:
+### CIP-7 Equation Form
 
-(incomplete)
-<img src="equation-cip7-currentEq.png" width="400">
+<img src="equation5-cip7-currentEq.png" width="500">
 
-- with $k = 150$ and $a0 = 0.0$
-- with $k = 500$ and $a0 = 0.0$
-- with $k = 1000$ and $a0 = 0.0$
-- with $k = 150$ and $a0 = 0.3$
-- with $k = 500$ and $a0 = 0.3$
-- with $k = 1000$ and $a0 = 0.3$
-- with $k = 150$ and $a0 = 0.6$
-- with $k = 500$ and $a0 = 0.6$
-- with $k = 1000$ and $a0 = 0.6$
+Where equations and independent variables to test are:
+- Eq (1) CIP-7 Rewards: Legacy rewards equation with n-root curved pledge benefit
+- Eq (2) Repurposed lambda_alt_prime, and legacy sigma_prime
+- Eq (3) Lambda_alt: N-root curve pledge benefit
+- Eq (4) Crossover: An expression called crossover represents the point where the new curve crosses the line of the original curve, and the benefit in the new and original equations is identical.
+  - The crossover_factor is a divisor of saturation that calculates the pledge where the curve crosses the line. crossover_factor > 1.
+- Eq (5) Curve_root: The n-root curve exponent used in Eq 2 to alter the rewards. 1 = linear, 2 = square root, 3 = cube root, etc.
+
+And the recommended testing permutations are:
+
+    For crossover in crossover_factor range [10,20,50]:
+      For n in curved_root range [2,3,4]:
+        - with $k = 150$ and $a0 = 0.0$
+        - with $k = 500$ and $a0 = 0.0$
+        - with $k = 1000$ and $a0 = 0.0$
+        - with $k = 150$ and $a0 = 0.3$
+        - with $k = 500$ and $a0 = 0.3$
+        - with $k = 1000$ and $a0 = 0.3$
+        - with $k = 150$ and $a0 = 0.6$
+        - with $k = 500$ and $a0 = 0.6$
+        - with $k = 1000$ and $a0 = 0.6$
 
 ### Linearly Biased Variation with a Leverage Limit:
 
