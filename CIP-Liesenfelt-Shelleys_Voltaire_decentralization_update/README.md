@@ -452,6 +452,22 @@ Mahmoud Nimer's proposed reward equation presented in the [Ada Link's Stakepool 
 
 <img src="images/equation8-nimer-adalink.png" width="400">
 
+Where:
+* Eq (1) The Nimer Rewards Equation
+* Eq (2) s_hat_primt: The pledge saturation equation
+* Eq (3) s_hat: Pool pledge / Total Network Pool Pledge
+
+And the recommended testing permutations are:
+
+- with $k = 150$ and $a0 = 0.0$
+- with $k = 500$ and $a0 = 0.0$
+- with $k = 1000$ and $a0 = 0.0$
+- with $k = 150$ and $a0 = 0.3$
+- with $k = 500$ and $a0 = 0.3$
+- with $k = 1000$ and $a0 = 0.3$
+- with $k = 150$ and $a0 = 0.6$
+- with $k = 500$ and $a0 = 0.6$
+- with $k = 1000$ and $a0 = 0.6$
 
 
 # Backwards compatibility
